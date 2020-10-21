@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ColorPickerSocket-Server:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ColorPickerSocket_Server_jar</output-path>
+    <root id="archive" name="ColorPickerSocket-Server.jar">
+      <element id="module-output" name="ColorPickerSocket-Server" />
+    </root>
+  </artifact>
+</component>
