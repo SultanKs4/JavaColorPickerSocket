@@ -22,35 +22,21 @@ public class Client {
     private String colorCodeFinal = "0,0,0";
 
     public Client() {
-        buttonSetColorPicker.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                Color selectedColor = colorPicker();
-                panelColor.setBackground(selectedColor);
+        buttonSetColorPicker.addActionListener(actionEvent -> setColorCode());
+        buttonSend.addActionListener(actionEvent -> sendData());
+    }
 
-                textFieldRed.setText(String.valueOf(selectedColor.getRed()));
-                textFieldGreen.setText(String.valueOf(selectedColor.getGreen()));
-                textFieldBlue.setText(String.valueOf(selectedColor.getBlue()));
+    private void setColorCode() {
+        Color selectedColor = colorPicker();
+        panelColor.setBackground(selectedColor);
 
-                colorCodeFinal = textFieldRed.getText() + "," +
-                        textFieldGreen.getText() + "," +
-                        textFieldBlue.getText() + ",";
-            }
-        });
-        buttonSend.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                try {
-                    AtomicInteger messageWritten = new AtomicInteger(0);
-                    AtomicInteger messageRead = new AtomicInteger(0);
+        textFieldRed.setText(String.valueOf(selectedColor.getRed()));
+        textFieldGreen.setText(String.valueOf(selectedColor.getGreen()));
+        textFieldBlue.setText(String.valueOf(selectedColor.getBlue()));
 
-                    EchoClient(textFieldIPAddress.getText(), Integer.parseInt(textFieldPort.getText()), colorCodeFinal, messageWritten, messageRead);
-
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                }
-            }
-        });
+        colorCodeFinal = textFieldRed.getText() + "," +
+                textFieldGreen.getText() + "," +
+                textFieldBlue.getText() + ",";
     }
 
     private Color colorPicker() {
@@ -63,6 +49,18 @@ public class Client {
             resultColor = current;
         }
         return resultColor;
+    }
+
+    private void sendData() {
+        try {
+            AtomicInteger messageWritten = new AtomicInteger(0);
+            AtomicInteger messageRead = new AtomicInteger(0);
+
+            EchoClient(textFieldIPAddress.getText(), Integer.parseInt(textFieldPort.getText()), colorCodeFinal, messageWritten, messageRead);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
 
     //////////////////////////

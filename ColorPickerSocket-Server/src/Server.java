@@ -20,22 +20,21 @@ public class Server {
     private JPanel panelBackgroundColor;
 
     public Server() {
-        buttonListen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
+        buttonListen.addActionListener(actionEvent -> listenData());
+    }
+
+    private void listenData() {
+        try {
+            new Thread(() -> {
                 try {
-                    new Thread(() -> {
-                        try {
-                            EchoServer(textFieldIPAddress.getText(), Integer.parseInt(textFieldPort.getText()));
-                        } catch (IOException ioException) {
-                            ioException.printStackTrace();
-                        }
-                    }).start();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                    EchoServer(textFieldIPAddress.getText(), Integer.parseInt(textFieldPort.getText()));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
                 }
-            }
-        });
+            }).start();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
 
     public static void main(String[] args) {
