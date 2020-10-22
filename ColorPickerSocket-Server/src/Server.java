@@ -28,6 +28,8 @@ public class Server {
             new Thread(() -> {
                 try {
                     EchoServer(textFieldIPAddress.getText(), Integer.parseInt(textFieldPort.getText()));
+                    JOptionPane.showMessageDialog(null, "Server Listening");
+                    buttonListen.setEnabled(false);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }

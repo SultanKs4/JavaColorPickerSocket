@@ -37,6 +37,8 @@ public class Client {
         colorCodeFinal = textFieldRed.getText() + "," +
                 textFieldGreen.getText() + "," +
                 textFieldBlue.getText() + ",";
+
+        JOptionPane.showMessageDialog(null, "Set Color Success");
     }
 
     private Color colorPicker() {
@@ -57,7 +59,7 @@ public class Client {
             AtomicInteger messageRead = new AtomicInteger(0);
 
             EchoClient(textFieldIPAddress.getText(), Integer.parseInt(textFieldPort.getText()), colorCodeFinal, messageWritten, messageRead);
-
+            JOptionPane.showMessageDialog(null, "Send Data to Server Success");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -83,7 +85,7 @@ public class Client {
 
             @Override
             public void failed(Throwable exc, AsynchronousSocketChannel channel) {
-                System.out.println("fail to connect to server");
+                JOptionPane.showMessageDialog(null, "Failed to connect to Server");
             }
 
         });
